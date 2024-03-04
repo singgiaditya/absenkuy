@@ -27,3 +27,9 @@ flutter:
   assets:
    - assets/icon/
 
+flutter_native_splash:
+  color: "#F96060"
+  image: assets/images/logo.png
+  android: true
+  ios: true
+
