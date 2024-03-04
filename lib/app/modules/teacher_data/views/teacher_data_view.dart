@@ -20,7 +20,9 @@ class TeacherDataView extends GetView<TeacherDataController> {
           padding: const EdgeInsets.symmetric(horizontal: 14),
           child: Column(
             children: [
-              SizedBox(height: 14,),
+              SizedBox(
+                height: 14,
+              ),
               TextField(
                 style: normalTextStyle.copyWith(fontSize: 12),
                 decoration: InputDecoration(
@@ -28,20 +30,33 @@ class TeacherDataView extends GetView<TeacherDataController> {
                   filled: true,
                   fillColor: Color.fromARGB(255, 247, 246, 251),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24),
-                    borderSide: BorderSide.none
-                  ),
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide.none),
                   hintText: "nama guru atau mata pelajaran",
                   hintStyle: normalTextStyle.copyWith(fontSize: 12),
                 ),
               ),
-              SizedBox(height: 14,),
-              ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                return TeacherCard();
-              },)
+              SizedBox(
+                height: 14,
+              ),
+              FutureBuilder(
+                future: controller.getDataGuru(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  
+                  return ListView.builder(
+                    itemCount: 5,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return TeacherCard();
+                    },
+                  );
+                },
+              )
             ],
           ),
         ));
@@ -57,17 +72,32 @@ class TeacherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 14, vertical:14),
+        padding: EdgeInsetsDirectional.symmetric(horizontal: 14, vertical: 14),
         child: Row(
           children: [
-            CircleAvatar(radius: 28,),
-            SizedBox(width: 16,),
+            CircleAvatar(
+              radius: 28,
+            ),
+            SizedBox(
+              width: 16,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Iyuz Mariyuz S.Kom", style: cardHeadingTextStyle.copyWith(fontSize: 12),),
-                Text("Matematika", style: cardRegularTextStyle.copyWith(fontWeight: FontWeight.w300),),
-                Text("08123658048", style: cardRegularTextStyle.copyWith(fontWeight: FontWeight.w300),)
+                Text(
+                  "Iyuz Mariyuz S.Kom",
+                  style: cardHeadingTextStyle.copyWith(fontSize: 12),
+                ),
+                Text(
+                  "Matematika",
+                  style: cardRegularTextStyle.copyWith(
+                      fontWeight: FontWeight.w300),
+                ),
+                Text(
+                  "08123658048",
+                  style: cardRegularTextStyle.copyWith(
+                      fontWeight: FontWeight.w300),
+                )
               ],
             )
           ],

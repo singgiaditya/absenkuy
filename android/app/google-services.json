@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "852614370643",
+    "firebase_url": "https://absensi-a641d-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "absensi-a641d",
     "storage_bucket": "absensi-a641d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:852614370643:android:0bc91518d437723a18fda6",
+        "mobilesdk_app_id": "1:852614370643:android:dad7ee9b7da8062a18fda6",
         "android_client_info": {
           "package_name": "com.singgidev.absenkuy"
         }

@@ -1,23 +1,19 @@
+import 'package:absenkuy/app/data/model/guru.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class TeacherDataController extends GetxController {
-  //TODO: Implement TeacherDataController
+  final db = FirebaseFirestore.instance;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  List<Guru> listGuru = [];
+
+  Future<void> getDataGuru() async {
+    await db.collection("users").get().then((event) {
+      List<Guru> dataGuru = [];
+      for (var doc in event.docs) {
+        dataGuru.add(Guru.fromJson(doc.data()));
+      }
+      listGuru = dataGuru;
+    });
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }
