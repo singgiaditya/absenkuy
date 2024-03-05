@@ -11,12 +11,12 @@ class RekapNilaiView extends GetView<RekapNilaiController> {
   const RekapNilaiView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final List<NilaiSemester> chartData = [
-      NilaiSemester(Semester: 1, rataRata: 75),
-      NilaiSemester(Semester: 2, rataRata: 78),
-      NilaiSemester(Semester: 3, rataRata: 80),
-      NilaiSemester(Semester: 4, rataRata: 75),
-      NilaiSemester(Semester: 5, rataRata: 85),
+    final List<NilaiChart> chartData = [
+      NilaiChart(Semester: 1, rataRata: 75),
+      NilaiChart(Semester: 2, rataRata: 78),
+      NilaiChart(Semester: 3, rataRata: 80),
+      NilaiChart(Semester: 4, rataRata: 75),
+      NilaiChart(Semester: 5, rataRata: 85),
     ];
 
     return Scaffold(
@@ -36,12 +36,12 @@ class RekapNilaiView extends GetView<RekapNilaiController> {
                     child: SfCartesianChart(
                         primaryXAxis: CategoryAxis(),
                         title: ChartTitle(text: 'Nilai Rata-Rata Tiap Semester'),
-                        series: <LineSeries<NilaiSemester, String>>[
-                      LineSeries<NilaiSemester, String>(
+                        series: <LineSeries<NilaiChart, String>>[
+                      LineSeries<NilaiChart, String>(
                           dataSource: chartData,
-                          xValueMapper: (NilaiSemester nilai, _) =>
+                          xValueMapper: (NilaiChart nilai, _) =>
                               "${nilai.Semester}",
-                          yValueMapper: (NilaiSemester nilai, _) =>
+                          yValueMapper: (NilaiChart nilai, _) =>
                               nilai.rataRata,
                           // Enable data label
                           dataLabelSettings: DataLabelSettings(isVisible: true))

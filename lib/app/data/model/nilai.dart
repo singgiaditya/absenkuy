@@ -7,9 +7,9 @@ class NilaiPelajaran{
   NilaiPelajaran({required this.namaPelajaran,required this.tugas, required this.uts, required this.uas});
 }
 
-class NilaiSemester{
+class NilaiChart{
   final int Semester;
   final double rataRata;
 
-  NilaiSemester({required this.Semester, required this.rataRata});
+  NilaiChart({required this.Semester, required this.rataRata});
 }
