@@ -1,4 +1,6 @@
+import 'package:absenkuy/app/global/controller/auth_controller.dart';
 import 'package:absenkuy/app/global/theme/my_color.dart';
+import 'package:absenkuy/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:absenkuy/app/global/theme/my_text_style.dart';
 
@@ -10,6 +12,7 @@ class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    AuthController authC = Get.find<AuthController>();
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -112,10 +115,25 @@ class ProfileView extends GetView<ProfileController> {
                             width: double.infinity,
                             height: 40,
                             child: ElevatedButton(
-                              onPressed: () {},
-                              child: Text("Logout", style: subTitleTextStyle.copyWith(color: primaryClr),),
+                              onPressed: () async {
+                                Map<String, dynamic> hasil = await authC.logout();
+                                if (hasil["error"] == true) {
+                                  Get.snackbar("Error", hasil["message"]);
+                                }else{
+                                  Get.offAllNamed(Routes.LOGIN);
+                                }
+                              },
+                              child: Text(
+                                "Logout",
+                                style: subTitleTextStyle.copyWith(
+                                    color: primaryClr),
+                              ),
                               style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12), side: BorderSide(color: primaryClr))),
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          side: BorderSide(color: primaryClr))),
                                   backgroundColor:
                                       MaterialStatePropertyAll(Colors.white)),
                             ))
