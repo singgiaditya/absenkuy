@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import '../../data/model/student.dart';
+
 class AuthController extends GetxController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final db = FirebaseFirestore.instance;
   User? user;
 
   Future<Map<String, dynamic>> login(String email, String pass) async {
@@ -25,6 +29,15 @@ class AuthController extends GetxController {
         "message": "Tidak dapat login.",
       };
     }
+  }
+
+  Future<Student> getDataUser() async{
+    Student student = Student();
+    await db.collection("users").get().then((event) {
+      student = Student.fromJson(event.docs[0].data());
+    }
+    );
+    return student;
   }
 
   Future<Map<String, dynamic>> logout() async {

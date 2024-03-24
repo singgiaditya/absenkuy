@@ -44,6 +44,10 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircularProgressIndicator();
+    return Scaffold(
+      body: Center(
+        child: Image.asset("assets/images/logo.png"),
+      ),
+    );
   }
 }

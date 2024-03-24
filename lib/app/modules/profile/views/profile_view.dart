@@ -3,6 +3,7 @@ import 'package:absenkuy/app/global/theme/my_color.dart';
 import 'package:absenkuy/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:absenkuy/app/global/theme/my_text_style.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
@@ -36,14 +37,27 @@ class ProfileView extends GetView<ProfileController> {
                           size: 25,
                         )))),
           ),
-          Center(
-            child: Container(
-              transform: Matrix4.translationValues(0, -60, 0),
-              child: CircleAvatar(
-                radius: 80,
-                backgroundColor: Colors.indigo,
-              ),
-            ),
+          FutureBuilder(
+            future: authC.getDataUser(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator(),);
+              }
+
+              if (snapshot.hasError) {
+                return Center(child: Text("Something error, please check your internet connection", style: titleTextStyle,),);
+              }
+
+              return Center(
+                child: Container(
+                  transform: Matrix4.translationValues(0, -60, 0),
+                  child: CircleAvatar(
+                    radius: 80,
+                    backgroundImage: NetworkImage(snapshot.data!.image!.isEmpty  ? "assets/images/blank-profile.png" : "${snapshot.data?.image}"),
+                  ),
+                ),
+              );
+            }
           ),
           Center(
             child: Container(
