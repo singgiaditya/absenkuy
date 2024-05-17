@@ -1,6 +1,6 @@
 # absenkuy
 
-A new Flutter project.
+School Attendance App build with flutter and firebase
 
 ## Getting Started
 
